@@ -1,8 +1,13 @@
 package com.example.demowithtests.dto;
 
+import com.example.demowithtests.domain.Address;
+import com.example.demowithtests.domain.Photo;
+
 import javax.persistence.Entity;
 import java.time.Instant;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 
 public class EmployeeDto {
@@ -10,4 +15,9 @@ public class EmployeeDto {
     public String country;
     public String email;
     //public Date creationTime = Date.from(Instant.now());
+
+    public Set<PhotoDto> photos = new HashSet<>();
+    public Set<Address> addresses = new HashSet<>();
+
+
 }

@@ -2,6 +2,7 @@ package com.example.demowithtests.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -14,6 +15,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Data
 public class Employee {
 
     @Id
@@ -29,6 +31,10 @@ public class Employee {
     @JoinColumn(name = "employee_id")
     private Set<Address> addresses = new HashSet<>();
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "employee_id")
+    private Set<Photo> photos = new HashSet<>();
+
     /*@OneToMany(mappedBy = "employee", fetch = FetchType.EAGER)
     private List<Address> addresses;*/
 
@@ -36,6 +42,19 @@ public class Employee {
         this.name = name;
         this.country = country;
         this.email = email;
+    }
+
+    public Employee() {
+    }
+
+    public Employee(Integer id, String name, String country, String email, Boolean isDeleted, Set<Address> addresses, Set<Photo> photos) {
+        this.id = id;
+        this.name = name;
+        this.country = country;
+        this.email = email;
+        this.isDeleted = isDeleted;
+        this.addresses = addresses;
+        this.photos = photos;
     }
 
     public Boolean getIsDeleted() {
